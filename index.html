@@ -50,6 +50,10 @@
   .cat{display:block;font-size:11px;color:var(--muted);font-weight:400;margin-top:2px}
   .cell{width:64px;text-align:center;color:#0c3a2c;font-weight:600;border-radius:6px}
   .star{color:var(--teal);font-size:11px;margin-left:5px;font-weight:700}
+  .ext{margin-left:7px;color:var(--teal);text-decoration:none;font-weight:700;font-size:12px}
+  .ext:hover{text-decoration:underline}
+  .extf{color:var(--teal);font-weight:600;text-decoration:none}
+  .extf:hover{text-decoration:underline}
   .legend{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:14px 2px 0;font-size:12px;color:var(--muted)}
   .swatch{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:5px}
   .detail{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;min-height:90px}
@@ -244,7 +248,7 @@ const COMPANIES = [
     ainote:"Among the most advanced document-AI engines; strictly pre-close." },
   { name:"Rogo", category:"AI-native", coverage:[2,2,0,0], ai:3,
     segment:"Investment banks · PE", pricing:"Enterprise",
-    strength:"Vertical AI analyst for dealmakers — automates screening, analysis and diligence prep; well funded (~$75M, per press).",
+    strength:"Vertical AI analyst for dealmakers — automates screening, analysis and diligence prep; heavily funded (Series D, $300M+ total per press).",
     gap:"Pre-close analyst tooling — no execution workflow, no integration, no outcome data.",
     ainote:"Sourcing + diligence AI; nothing after the close." },
   { name:"Model ML", category:"AI-native", coverage:[2,2,1,0], ai:3,
@@ -258,6 +262,20 @@ const COMPANIES = [
     gap:"Sourcing only — no execution or integration.",
     ainote:"Search and discovery AI is its whole product — and it is strong." },
 ];
+
+const SITE = {
+  "MergerWare":"https://www.mergerware.com",
+  "Midaxo":"https://www.midaxo.com",
+  "Devensoft":"https://www.devensoft.com",
+  "DealRoom":"https://dealroom.net",
+  "Datasite":"https://www.datasite.com",
+  "Intralinks":"https://www.intralinks.com",
+  "Ansarada":"https://www.ansarada.com",
+  "Hebbia":"https://www.hebbia.com",
+  "Rogo":"https://rogo.ai",
+  "Model ML":"https://www.modelml.com",
+  "Grata":"https://grata.com",
+};
 
 const heat = ["var(--h0)","var(--h1)","var(--h2)","var(--h3)"];
 const heatText = ["#9aa39e","#0c3a2c","#08362a","#ffffff"];
@@ -273,6 +291,7 @@ function render(){
     const idx = COMPANIES.indexOf(c);
     return '<tr data-i="'+idx+'" class="'+(c.us?'us':'')+'">'+
       '<td class="co">'+c.name+(c.us?'<span class="star">▮ you</span>':'')+
+        '<a class="ext" href="'+SITE[c.name]+'" target="_blank" rel="noopener" title="Official website" onclick="event.stopPropagation()">↗</a>'+
         '<span class="cat">'+c.category+'</span></td>'+
       cell(c.coverage[0])+cell(c.coverage[1])+cell(c.coverage[2])+cell(c.coverage[3])+
       '<td class="cell" style="background:'+heat[c.ai]+';color:'+heatText[c.ai]+'">'+aiWord[c.ai]+'</td>'+
@@ -290,7 +309,7 @@ function select(i){
     '<div class="drow"><span class="k">Edge</span><span class="v"><span class="good">'+c.strength+'</span></span></div>'+
     '<div class="drow"><span class="k">Gap</span><span class="v">'+c.gap+'</span></div>'+
     '<div class="drow"><span class="k">AI</span><span class="v">'+c.ainote+'</span></div>'+
-    '<div class="facts"><span>Segment: <b>'+c.segment+'</b></span><span>Pricing: <b>'+c.pricing+'</b></span></div>';
+    '<div class="facts"><span>Segment: <b>'+c.segment+'</b></span><span>Pricing: <b>'+c.pricing+'</b></span><span><a class="extf" href="'+SITE[c.name]+'" target="_blank" rel="noopener">Official site ↗</a></span></div>';
 }
 document.querySelectorAll('.fbtn').forEach(b=>{
   b.onclick = ()=>{
